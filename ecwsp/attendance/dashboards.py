@@ -4,7 +4,48 @@ from ecwsp.sis.dashboards import ReportBuilderDashlet
 from ecwsp.attendance.models import StudentAttendance
 from report_builder.models import Report
 
+from .models import StudentAttendance, CourseAttendance, AttendanceStatus, AttendanceLog
+from ecwsp.schedule.models import Course
+from ecwsp.sis.models import Student, UserPreference, Faculty, SchoolYear
+
 import datetime
+
+class AttendanceIndividualDashlet(Dashlet):
+    template = 'attendance/individual_attendance_report.html'
+    
+class AttendanceSubmissionPercentageDashlet(Dashlet):
+    template = 'attendance/teacher_submissions_percentage.html'
+    
+    # ripped directly from teacher_submissions in attendance/views.py. Create function or class for common use cases in future...
+    def submission_percentage(self):
+        """ Returns the percentage of teachers who have submitted attendance today. 
+            e.g. 2/3 teachers submit attendance, thus 66%. """
+        logs = AttendanceLog.objects.filter(date=datetime.date.today())
+        homerooms = Course.objects.filter(homeroom=True)
+        homerooms = homerooms.filter(marking_period__school_year__active_year=True)
+        homerooms = homerooms.filter(coursemeet__day__contains=datetime.date.today().isoweekday()).distinct()
+        submissions = []
+        homeroom_count = 0
+        submission_count = 0
+        for homeroom in homerooms:
+            homeroom_count += 1
+            log = AttendanceLog.objects.filter(date=datetime.date.today(), course=homeroom)
+            if log.count() > 0:
+                submission_count += 1
+        if homeroom_count > 0:
+            sub_percent = int((submission_count/homeroom_count)*100)
+        else:
+            sub_percent = 0
+        return sub_percent
+		
+    def get_context_data(self, **kwargs):
+        submission_percentage = self.submission_percentage()
+        context = dict(self.context.items() + {
+            'submission_percentage': submission_percentage,
+        }.items())
+        return super(AttendanceSubmissionPercentageDashlet, self).get_context_data(**kwargs)
+		
+				
 
 class AttendanceDashlet(ListDashlet):
     model = StudentAttendance
@@ -52,6 +93,7 @@ class AttendanceAdminListDashlet(AdminListDashlet):
 class AttendanceDashboard(Dashboard):
     app = 'attendance'
     dashlets = [
+        AttendanceSubmissionPercentageDashlet(title="Attendance Report"),
         AttendanceDashlet(title="Recent Attendance"),
         AttendanceLinksListDashlet(title="Links"),
         AttendanceReportBuilderDashlet(title="Reports",),
