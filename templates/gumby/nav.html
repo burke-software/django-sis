@@ -77,6 +77,15 @@
       </li>
     {% endif %}
     
+    
+    {% if 'ecwsp.attendance' in settings.INSTALLED_APPS %}
+    {% if perms.sis.reports or perms.attendance.change_studentattendance or perms.attendance.take_studentattendance %}
+      <li>
+        <a href="/attendance/dashboard/"> {% trans 'Attendance' %} </a>
+      </li>
+    {% endif %}
+    {% endif %}
+    
 
     {% if 'ecwsp.schedule' in settings.INSTALLED_APPS %}
     {% if perms.schedule.change_course or perms.grades.change_own_grade %}
@@ -104,6 +113,13 @@
     {% endif %}
     {% endif %}
     
+    
+    {% if 'ecwsp.work_study' in settings.INSTALLED_APPS %} {% if perms.work_study.change_studentworker or perms.work_study.view_studentworker or perm.work_study.reports %}
+      <li>
+        <a href="/work_study/dashboard/"> CWSP </a>
+      </li>
+    {% endif %}{% endif %}
+    
 
     {% if 'ecwsp.discipline' in settings.INSTALLED_APPS %}
     {% if perms.discipline.change_studentdiscipline %}
@@ -117,17 +133,11 @@
   
   {% if perms.counseling.add_referralform and 'ecwsp.counseling' in settings.INSTALLED_APPS %}
     <li>
-      <a href="/counseling/dashboard"> Counseling </a>
+      <a href="/counseling/dashboard"> {% trans 'Counseling' %} </a>
     </li>
   {% endif %}
-  
-  {% if 'ecwsp.work_study' in settings.INSTALLED_APPS %} {% if perms.work_study.change_studentworker or perms.work_study.view_studentworker or perm.work_study.reports %}
-    <li>
-      <a href="/work_study/dashboard/"> CWSP </a>
-    </li>
-  {% endif %}{% endif %}
 
-
+  <!-- Commenting this out because I'm not sure what to do with this yet...
   {% if perms.alumni.change_alumni or perms.auth.change_user or perms.administration.change_configuration or perms.engrade_sync.change_coursesync %}
   <li>
     <a href="/administration/dashboard/"> Management </a>
@@ -147,6 +157,7 @@
       </div>
   </li>
   {% endif %}
+  -->
 
   
   </ul>
