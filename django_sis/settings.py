@@ -19,10 +19,13 @@ BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components/')
 LOGIN_REDIRECT_URL = "/"
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'sample_db',
-        'ATOMIC_REQUESTS': True,
-    },
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'docker',
+        'USER': 'docker',
+        'PASSWORD': 'docker',
+        'HOST': os.environ.get('DB_1_PORT_5432_TCP_ADDR'),
+        'PORT': os.environ.get('DB_1_PORT_5432_TCP_PORT'),
+    }
 }
 EMAIL_HOST = 'daphne.cristoreyny.org'
 # Prefered file format, may be changed in user preferences.
@@ -308,6 +311,7 @@ INSTALLED_APPS = (
     'ecwsp.benchmarks',
     'ecwsp.benchmark_grade',
     'ecwsp.naviance_sso',
+    'rosetta',
     # These can be enabled if desired but the default is off
     #'ldap_groups',
     #'raven.contrib.django',
@@ -318,8 +322,6 @@ INSTALLED_APPS = (
     #'django_extensions',
     #'google_auth',
     #'ldap_groups',
-    #'rosetta-grappelli',
-    #'rosetta',
 )
 
 COMPRESS_PRECOMPILERS = (
