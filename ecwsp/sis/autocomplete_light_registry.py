@@ -7,7 +7,7 @@ class UserAutocomplete(autocomplete_light.AutocompleteModelBase):
     attrs = {
         'placeholder': 'Lookup Student(s)',
     }
-    
+
 class ActiveUserAutocomplete(UserAutocomplete):
     choices=Student.objects.filter(is_active=True)
 
