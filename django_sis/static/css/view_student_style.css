@@ -1,0 +1,141 @@
+.section-header {
+	background: #2BC9ED url('/static/images/right-arrow.gif') no-repeat 10px center;
+	padding: 4px 0 4px 32px;
+	text-transform: uppercase;
+	font-family: Tahoma;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 16px;
+	display: block;
+	text-decoration: none;
+}
+
+.section-header a {
+    color: #ffffff;
+}
+
+a.edit_link {
+    float: right;
+    font-size: 80%;
+}
+
+a.edit_link:hover {
+    color: #444;
+}
+
+@media only screen and (min-width: 767px){ 
+    a.subsection {
+        margin: 0 0 0 32px;
+    }
+}
+a.subsection {
+	background: #eaeaea url('/static/images/right-arrow-gray.gif') no-repeat 10px center;
+	color: #5f5f5f;
+}
+
+.expanded { background: #2BC9ED url('/static/images/down-arrow.gif') no-repeat 10px center!important; }
+
+.sub-expanded { background: #eaeaea url('/static/images/down-arrow-gray.gif') no-repeat 10px center!important; }
+
+.sv-name {
+	margin-bottom: 0; padding-bottom: 0;
+}
+
+.test-arrow {
+	width: 10px; height: 10px; 
+	border-top: 20px solid #fff;
+	border-right: 20px solid transparent;
+	border-left: 20px solid transparent;
+	border-bottom: 20px solid transparent;
+	display: inline;
+	overflow: hidden;
+	margin-top: 20px;
+}
+
+@media only screen and (min-width: 767px){ 
+    .section-table {
+        margin: 10px 32px;
+    }
+}
+.section-table{
+	font-family: Verdana;
+}
+
+.section-table td, .subsection-table td {
+	padding: 5px 30px 5px 0;
+	/*border: 1px solid #000;*/
+	border: 0;
+	vertical-align: top;
+}
+
+.section-table .thing, .subsection-table .thing, th {
+	color: #808080;
+}
+
+.section-table p, .subsection-table p {
+	margin: 0 0 10px;
+}
+
+.subsection-table {
+	margin: 10px 0 10px 63px;
+	font-family: Verdana;
+}
+
+#student-image {
+	float: right;
+	margin-top: 20px;
+}
+
+.sv-section {
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.sv-main {
+	display: none;
+        padding-left: 16px;
+}
+
+th {
+	text-align: left;
+	font-weight: normal;
+}
+
+#transcript {
+	color: #2BC9ED;
+	margin-top: 12px;
+}
+
+#name-and-grade {
+	float: left;
+}
+
+#student-header {
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 16px;
+	font-family: Verdana;
+}
+
+
+.ul-section-table {
+	margin: 10px 32px;
+	padding: 0;
+	font-family: Verdana;
+	list-style: none;
+}
+
+.div-thing {
+	color: #808080;
+	display: inline-block;
+	width: 200px;
+}
+
+table {
+    border: none;
+}
+
+.spacer {
+    padding-left: 10px;
+    padding-right: 10px;
+}

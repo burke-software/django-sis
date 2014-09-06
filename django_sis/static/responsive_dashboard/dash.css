@@ -1,0 +1,70 @@
+.dashlet { 
+    width: 300px;
+    position: absolute;
+    border: solid 1px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.dashlet li { 
+    text-align: left;
+    padding-left: 10px;
+}
+
+.dashlet .dashlet_body {
+    min-height: 200px;
+}
+
+.dashlet .close_x {
+    max-width: 80px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    opacity: 0.8;
+    display: none;
+}
+
+@media (max-width: 700px) {
+    div.dashlet {
+        max-width: 96% !important;
+    }
+}
+
+#dashboard_container {
+    position: relative;
+}
+
+.dashlet table{
+    width: 100%;
+    border-left: none;
+    border-right: none;
+}
+.dashlet tr:nth-child(even) {
+    background-color: #F4F4F4;
+}
+.dashlet table tbody tr td {
+    vertical-align: middle;
+}
+
+.dashlet header {
+    font-size: 130%;
+    padding-bottom: .7em;
+    padding-top: .7em;
+    text-transform: uppercase;
+}
+
+.dashlet table thead th {
+    border-radius: 0px 0px 0px 0px !important;
+}
+.dashlet table thead td {
+    border-radius: 0px 0px 0px 0px !important;
+}
+
+.dashlet .list_item {
+    border-top: solid 1px;
+    text-align: left;
+}
+
+img.dashboard_gear {
+    max-width: 13px;
+}
