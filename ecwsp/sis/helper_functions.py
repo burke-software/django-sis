@@ -1,3 +1,5 @@
+from functools import wraps
+
 from django.db.models import AutoField
 from django.db import models, connection
 from django.core.exceptions import PermissionDenied
@@ -129,3 +131,18 @@ class CharNullField(models.CharField):
             return None
        else:
             return super(CharNullField, self).get_db_prep_value(value, *args, **kwargs)
+
+
+def disable_for_loaddata(signal_handler):
+    """
+    Decorator that turns off signal handlers when loading fixture data.
+
+    from http://stackoverflow.com/a/15625121/907060
+    """
+
+    @wraps(signal_handler)
+    def wrapper(*args, **kwargs):
+        if kwargs['raw']:
+            return
+        signal_handler(*args, **kwargs)
+    return wrapper

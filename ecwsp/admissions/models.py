@@ -11,6 +11,8 @@ from django.core.mail import EmailMultiAlternatives
 from django.template import Context
 from django.template.loader import render_to_string
 
+from ecwsp.sis.helper_functions import disable_for_loaddata
+
 from jsonfield import JSONField
 import datetime
 
@@ -298,6 +300,8 @@ def cache_applicant_m2m(sender, instance, action, reverse, model, pk_set, **kwar
 
 m2m_changed.connect(cache_applicant_m2m, sender=Applicant.parent_guardians.through)
 
+
+@disable_for_loaddata
 def email_alert_for_submitted_applicant(sender, instance, created, **kwargs):
     """send email alert on applicant creation"""
     if created and config.APPLICANT_EMAIL_ALERT:
