@@ -56,7 +56,7 @@ faulthandler==2.4
 flower==0.7.3
 html5lib==0.999
 httpagentparser==1.7.5
-jdcal==1.0
+jdcal==1.0.1
 jsonfield==1.0.0
 Markdown==2.5.1
 medusa==0.5.4
