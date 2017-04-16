@@ -18,8 +18,7 @@ import sys
 from ckeditor.fields import RichTextField
 from django_cached_field import CachedDecimalField
 from decimal import Decimal
-from ecwsp.sis.helper_functions import round_as_decimal
-
+from ecwsp.sis.helper_functions import round_as_decimal, disable_for_loaddata
 logger = logging.getLogger(__name__)
 
 
@@ -609,6 +608,9 @@ class Student(User, CustomFieldModel):
             cursor.execute("insert into work_study_studentworker (student_ptr_id) values (" + str(self.id) + ");")
         except:
             return
+
+
+@disable_for_loaddata
 def after_student_m2m(sender, instance, action, reverse, model, pk_set, **kwargs):
     if hasattr(instance, 'emergency_contacts'): # Apparently instance might be whatever the fuck it wants to be, not just student.
         if not instance.emergency_contacts.filter(primary_contact=True).count():
